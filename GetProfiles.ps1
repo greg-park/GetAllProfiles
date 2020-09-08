@@ -11,7 +11,10 @@ function GetAllProfiles {
         write-host "Fix profile:", $Profile.Name
         # We have a cmdlet that creates a powershell
         # script from an existing profile.  Save that to a temp profile script
+        # Note: If the profile is based off a profile template then the powershell script will
+        # only hvae refernce to that template.  No profile details
         Get-HPOVServerProfile -name $Profile.Name | convertto-HPOVPowerShellscript > TempSP.ps1
+        
         # Change virtual SN setting to physical SN setting
         # TODO: Code goes here th change TempSP.ps1 setting for Physical SN
         # need to shutdown server, unassign the existing profile and run the TempSP.ps1 script
